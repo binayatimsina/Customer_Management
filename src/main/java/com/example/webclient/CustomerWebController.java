@@ -11,7 +11,6 @@ public class CustomerWebController {
     @Autowired RestTemplate restTemplate;
 
     public String getAllCustomers() {
-        
         return restTemplate.getForObject("http://localhost:8080/customers", String.class);
     }
 
