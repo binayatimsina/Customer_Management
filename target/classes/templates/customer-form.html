@@ -1,10 +1,9 @@
-<form>
+<form action="#" th:action="@{/web/customers/create}" th:object="${customer}" method="post" >
     <h1>Customer Form</h1> <br>
     <label for="fname">Id:</label><br>
     <input type="text" id="fname" name="fname"><br>
     <label for="lname">Name:</label><br>
     <input type="text" id="lname" name="lname"> <br> <br>
     <input type="submit" value="Submit"> &ensp; &ensp;
-    <input type="submit" value="Edit">
   </form>
   

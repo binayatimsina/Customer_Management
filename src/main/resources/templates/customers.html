@@ -30,13 +30,14 @@ tr:nth-child(even) {
   </tr>
   <tr th:each="customer : ${customers}">
     <td th:text="${customer.id}">1</td>
-    <td><a href="#" th:text="${customer.name}">John</a></td>
+    <td th:text="${customer.name}">John</td>
+    <td><a href="web/customers/{id}">Edit</a></td>
 </tr>
 </table>
 
 </body>
 </html>
 
-<a href="">Add Customer</a>
+<a href="customers/create">Add Customer</a>
 <a href="">Delete Customer</a>
 <a href="">Edit Customer</a>
