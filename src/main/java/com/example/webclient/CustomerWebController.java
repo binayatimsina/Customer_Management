@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
@@ -38,8 +39,10 @@ public class CustomerWebController {
     }
 
     @PostMapping("")
-    public String createCustomer() {
-        return restTemplate.postForObject("http://localhost:8080/customers", null, String.class);
+    public String createCustomer(@ModelAttribute Customer customer) {
+        System.out.println("here");
+        restTemplate.postForObject("http://localhost:8080/customers", customer, Customer.class);
+        return "redirect:customers";
     }
 
     public String editCustomerForm(Long id) {
