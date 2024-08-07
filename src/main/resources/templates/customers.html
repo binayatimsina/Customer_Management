@@ -28,6 +28,10 @@ tr:nth-child(even) {
     <th>ID</th>
     <th>NAME</th>
   </tr>
+  <tr th:each="customer : ${customers}">
+    <td th:text="${customer.id}">1</td>
+    <td><a href="#" th:text="${customer.name}">John</a></td>
+</tr>
 </table>
 
 </body>

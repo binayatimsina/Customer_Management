@@ -16,15 +16,13 @@ import com.example.webclient.Customer;
 @RequestMapping("/web/customers")
 public class CustomerWebController {
     @Autowired RestTemplate restTemplate;
-
+    private final String url = "http://localhost:8080/customers";
     @GetMapping("")
     public String getAllCustomers(Model model) {
-        Customer[] customer = restTemplate.getForObject("http://localhost:8080/customers", Customer[].class);
-        model.addAttribute("customers", customer);
-        // var customers = restTemplate.getForEntity("http://localhost:8080/customers", Object.class);
-        System.out.println(model.getAttribute("customers"));
+        Customer[] customers = restTemplate.getForObject(url, Customer[].class);
+        System.out.println(customers.getClass());
+        model.addAttribute("customers", customers);
         return  "customers";
-        // return restTemplate.getForObject("http://localhost:8080/customers", String.class);
     }
     
     public void createCustomerForm() {
