@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
@@ -17,9 +18,12 @@ public class CustomerWebController {
     @Autowired RestTemplate restTemplate;
 
     @GetMapping("")
-    public ResponseEntity<Object> getAllCustomers() {
-        var customers = restTemplate.getForEntity("http://localhost:8080/customers", Object.class);
-        return  customers;
+    public String getAllCustomers(Model model) {
+        Customer[] customer = restTemplate.getForObject("http://localhost:8080/customers", Customer[].class);
+        model.addAttribute("customers", customer);
+        // var customers = restTemplate.getForEntity("http://localhost:8080/customers", Object.class);
+        System.out.println(model.getAttribute("customers"));
+        return  "customers";
         // return restTemplate.getForObject("http://localhost:8080/customers", String.class);
     }
     
