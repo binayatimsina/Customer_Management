@@ -44,7 +44,7 @@ public class CustomerWebController {
     public String createCustomer(@ModelAttribute Customer customer) {
         System.out.println("here");
         restTemplate.postForObject("http://localhost:8080/customers", customer, Customer.class);
-        return "redirect:customers";
+        return "redirect:/web/customers";
     }
 
     @GetMapping("/edit/{id}")
