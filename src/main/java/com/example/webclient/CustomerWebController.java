@@ -61,9 +61,11 @@ public class CustomerWebController {
 
     }
 
-    public String deleteCustomer(Long id) {
-        restTemplate.delete("http://localhost:8080/customers/" + id);
-        return "Customer deleted";
+    @GetMapping("/delete/{id}") 
+    public String deleteCustomer(@PathVariable Long id) {
+
+        restTemplate.delete(url + "/" + id);
+        return "redirect:/web/customers";
     }
 
 }

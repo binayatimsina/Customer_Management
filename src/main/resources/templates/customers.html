@@ -32,6 +32,7 @@ tr:nth-child(even) {
     <td th:text="${customer.id}">1</td>
     <td th:text="${customer.name}">John</td>
     <td><a th:href="@{/web/customers/edit/{id}(id=${customer.id})}" >Edit</a></td>
+    <td><a th:href="@{/web/customers/delete/{id}(id=${customer.id})}" >Delete</a></td>
 </tr>
 </table>
 
@@ -39,5 +40,3 @@ tr:nth-child(even) {
 </html>
 
 <a href="/web/customers/create">Add Customer</a>
-<a href="">Delete Customer</a>
-<a href="">Edit Customer</a>
