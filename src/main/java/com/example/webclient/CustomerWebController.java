@@ -26,6 +26,7 @@ public class CustomerWebController {
         Customer[] customers = restTemplate.getForObject(url, Customer[].class);
         System.out.println(customers.getClass());
         model.addAttribute("customers", customers);
+        System.out.println("WE ARE RIGHT HERE");
         return  "customers";
     }
     
@@ -67,8 +68,8 @@ public class CustomerWebController {
         return "customer-form";
     }
 
-    @PostMapping("/purchase/{id}")
-    public String makePurchase(@PathVariable Long id, @ModelAttribute Customer customer) {
+    @PostMapping("/purchase/{id}/{name}")
+    public String makePurchase(@PathVariable Long id, @PathVariable String name, @ModelAttribute Customer customer) {
         restTemplate.postForObject("http://localhost:8080/customers", customer, Customer.class);
         return "redirect:/web/customers";
     }
