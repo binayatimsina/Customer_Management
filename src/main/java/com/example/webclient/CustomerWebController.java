@@ -1,5 +1,6 @@
 package com.example.webclient;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import com.example.webclient.Customer;
 
@@ -26,7 +28,6 @@ public class CustomerWebController {
         Customer[] customers = restTemplate.getForObject(url, Customer[].class);
         System.out.println(customers.getClass());
         model.addAttribute("customers", customers);
-        System.out.println("WE ARE RIGHT HERE");
         return  "customers";
     }
     
@@ -56,7 +57,6 @@ public class CustomerWebController {
 
     @PostMapping("")
     public String createCustomer(@ModelAttribute Customer customer) {
-        System.out.println("here");
         restTemplate.postForObject("http://localhost:8080/customers", customer, Customer.class);
         return "redirect:/web/customers";
     }
@@ -68,9 +68,12 @@ public class CustomerWebController {
         return "customer-form";
     }
 
-    @PostMapping("/purchase/{id}/{name}")
-    public String makePurchase(@PathVariable Long id, @PathVariable String name, @ModelAttribute Customer customer) {
-        restTemplate.postForObject("http://localhost:8080/customers", customer, Customer.class);
+    @PostMapping("/purchase/{id}")
+    public String makePurchase(@PathVariable Long id, @RequestParam("totalAmount") double totalAmount, @ModelAttribute Customer customer) {
+        System.out.println("INSIDE MAKE PURCHASE WEB CONTROLLER");
+        Map<String, Double> body = new HashMap<>();
+        body.put("totalAmount", totalAmount);
+        restTemplate.postForObject("http://localhost:8080/customers/purchase/" + id, body, Void.class);
         return "redirect:/web/customers";
     }
 

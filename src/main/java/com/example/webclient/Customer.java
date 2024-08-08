@@ -3,8 +3,8 @@ package com.example.webclient;
 public class Customer {
     private Long id;
     private String name;
-    private double total_sales;
-    private double balance_due;
+    private double totalSales;
+    private double balanceDue;
     
     public Customer(Long id, String name) {
         this.id = id;
@@ -28,18 +28,18 @@ public class Customer {
     }
 
     public double getTotalSales() {
-        return this.total_sales;
+        return this.totalSales;
     }
 
     public void setTotalSales(double totalSales) {
-        this.total_sales = totalSales;
+        this.totalSales = totalSales;
     }
 
     public double getBalanceDue() {
-        return this.balance_due;
+        return this.balanceDue;
     }
 
     public void setBalanceDue(double balanceDue) {
-        this.balance_due = balanceDue;
+        this.balanceDue = balanceDue;
     }
 }
