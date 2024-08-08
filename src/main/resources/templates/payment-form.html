@@ -1,0 +1,14 @@
+<form th:action="@{${customer.id} != null? '/web/customers/update/' + ${customer.id}: '/web/customers'}" th:object="${customer}" method="post" >
+    <h1>Payment Form</h1> <br>
+    <label>Payment Amount:</label><br>
+    <input type="number" id="payment" name="payment" value="0" min="0" step="1"><br><br>
+    <button type="submit" id="makePayment"> Make Payment</button>
+  </form>
+
+  <script>
+    document.getElementById('payment').addEventListener('input', function() {
+        var paymentAmount = document.getElementById('payment').value;
+        document.getElementById('makePayment').disabled = paymentAmount == 0;
+    });
+  </script>
+  
