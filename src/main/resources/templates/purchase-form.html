@@ -5,6 +5,7 @@
     <label>Total Amount:</label><br>
     <input id="totalAMount" name="totalAmount" value="0" readonly><br>
     <button type="submit" id="purchase"> Purchase</button>
+    <button type="submit" id="purchaseWithCredit">Purchase With Credit</button>
   </form>
 
   <script>
@@ -13,6 +14,7 @@
         var totalAmount = quantity * 25;
         document.getElementById('totalAMount').value = totalAmount;
         document.getElementById('purchase').disabled = quantity == 0;
+        document.getElementById('purchaseWithCredit').disabled = quantity ==0;
         
     });
   </script>
