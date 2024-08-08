@@ -35,6 +35,19 @@ public class CustomerWebController {
         return "customer-form";
     }
 
+    @GetMapping("/purchase/{id}")
+    public String createPurchaseForm(@PathVariable Long id, Model model) {
+        Customer customer = restTemplate.getForObject(url + "/" + id, Customer.class);
+        model.addAttribute("customer", customer);
+        return "purchase-form";
+    }
+
+    @GetMapping("/payment/{id}")
+    public String createPaymentForm(@PathVariable Long id, Model model) {
+        Customer customer = restTemplate.getForObject(url + "/" + id, Customer.class);
+        model.addAttribute("customer", customer);
+        return "payment-form";
+    }
 
     public String getCustomer(Long id) {
         return restTemplate.getForObject("http://localhost:8080/customers/" + id, String.class);
