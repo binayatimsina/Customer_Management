@@ -1,9 +1,19 @@
 <form th:action="@{${customer.id} != null? '/web/customers/update/' + ${customer.id}: '/web/customers'}" th:object="${customer}" method="post" >
     <h1>Purchase Form</h1> <br>
     <label>Quantity:</label><br>
-    <input type="number" id="quanity" name="quantity" value="0" min="0" step="1"><br>
+    <input type="number" id="quanity" name="quantity" value="0" min="0" step="1"><br><br>
     <label>Total Amount:</label><br>
-    <input type="number" id="totalAMount" name="totalAmount" value="0" readonly><br>
-    <button type="submit"> Purchase</button>
+    <input id="totalAMount" name="totalAmount" value="0" readonly><br>
+    <button type="submit" id="purchase"> Purchase</button>
   </form>
+
+  <script>
+    document.getElementById('quanity').addEventListener('input', function() {
+        var quantity = document.getElementById('quanity').value;
+        var totalAmount = quantity * 25;
+        document.getElementById('totalAMount').value = totalAmount;
+        document.getElementById('purchase').disabled = quantity == 0;
+        
+    });
+  </script>
   
