@@ -67,6 +67,12 @@ public class CustomerWebController {
         return "customer-form";
     }
 
+    @PostMapping("/purchase/{id}")
+    public String makePurchase(@PathVariable Long id, @ModelAttribute Customer customer) {
+        restTemplate.postForObject("http://localhost:8080/customers", customer, Customer.class);
+        return "redirect:/web/customers";
+    }
+
     @PostMapping("/update/{id}")
     public String updateCustomer(@PathVariable Long id, @ModelAttribute Customer customer) {
         restTemplate.put(url + "/" + id, customer); 
