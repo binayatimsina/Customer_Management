@@ -1,4 +1,4 @@
-<form th:action="@{${customer.id} != null? '/web/customers/update/' + ${customer.id}: '/web/customers'}" th:object="${customer}" method="post" >
+<form th:action="@{${customer.id} != null? '/web/customers/payment/' + ${customer.id}: '/web/customers'}" th:object="${customer}" method="post" >
     <h1>Payment Form</h1> <br>
     <label>Payment Amount:</label><br>
     <input type="number" id="payment" name="payment" value="0" min="0" step="1"><br><br>

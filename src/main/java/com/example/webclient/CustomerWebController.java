@@ -77,6 +77,25 @@ public class CustomerWebController {
         return "redirect:/web/customers";
     }
 
+    @PostMapping("/purchasewithcredit/{id}")
+    public String makePurchaseWithCredit(@PathVariable Long id, @RequestParam("totalAmount") double totalAmount, @ModelAttribute Customer customer) {
+        System.out.println("INSIDE MAKE PURCHASE WITH CREDIT WEB CONTROLLER");
+        Map<String, Double> body = new HashMap<>();
+        body.put("totalAmount", totalAmount);
+        restTemplate.postForObject("http://localhost:8080/customers/purchasewithcredit/" + id, body, Void.class);
+        return "redirect:/web/customers";
+    }
+    
+    @PostMapping("/payment/{id}")
+    public String makePayment(@PathVariable Long id, @RequestParam("payment") double payment, @ModelAttribute Customer customer) {
+        System.out.println("INSIDE MAKE PURCHASE WEB CONTROLLER");
+        Map<String, Double> body = new HashMap<>();
+        body.put("totalPayment", payment);
+        restTemplate.postForObject("http://localhost:8080/customers/payment/" + id, body, Void.class);
+        return "redirect:/web/customers";
+    }
+
+
     @PostMapping("/update/{id}")
     public String updateCustomer(@PathVariable Long id, @ModelAttribute Customer customer) {
         restTemplate.put(url + "/" + id, customer); 
