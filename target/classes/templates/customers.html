@@ -27,12 +27,18 @@ tr:nth-child(even) {
   <tr>
     <th>ID</th>
     <th>NAME</th>
+    <th>Total Sales</th>
+    <th>Balance Due</th>
   </tr>
   <tr th:each="customer : ${customers}">
     <td th:text="${customer.id}">1</td>
     <td th:text="${customer.name}">John</td>
+    <td th:text="${customer.totalSales}">0.0</td>
+    <td th:text="${customer.balanceDue}">0.0</td>
     <td><a th:href="@{/web/customers/edit/{id}(id=${customer.id})}" >Edit</a></td>
     <td><a th:href="@{/web/customers/delete/{id}(id=${customer.id})}" >Delete</a></td>
+    <td><a th:href="@{/web/customers/purchase/{id}(id=${customer.id})}" >Purchase</a></td>
+    <td><a th:href="@{/web/customers/payment/{id}(id=${customer.id})}" >Payment</a></td>
 </tr>
 </table>
 
