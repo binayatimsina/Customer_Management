@@ -26,7 +26,6 @@ public class CustomerWebController {
     @GetMapping("")
     public String getAllCustomers(Model model) {
         Customer[] customers = restTemplate.getForObject(url, Customer[].class);
-        System.out.println(customers.getClass());
         model.addAttribute("customers", customers);
         return  "customers";
     }
@@ -70,7 +69,6 @@ public class CustomerWebController {
 
     @PostMapping("/purchase/{id}")
     public String makePurchase(@PathVariable Long id, @RequestParam("totalAmount") double totalAmount, @ModelAttribute Customer customer) {
-        System.out.println("INSIDE MAKE PURCHASE WEB CONTROLLER");
         Map<String, Double> body = new HashMap<>();
         body.put("totalAmount", totalAmount);
         restTemplate.postForObject("http://localhost:8080/customers/purchase/" + id, body, Void.class);
@@ -79,7 +77,6 @@ public class CustomerWebController {
 
     @PostMapping("/purchasewithcredit/{id}")
     public String makePurchaseWithCredit(@PathVariable Long id, @RequestParam("totalAmount") double totalAmount, @ModelAttribute Customer customer) {
-        System.out.println("INSIDE MAKE PURCHASE WITH CREDIT WEB CONTROLLER");
         Map<String, Double> body = new HashMap<>();
         body.put("totalAmount", totalAmount);
         restTemplate.postForObject("http://localhost:8080/customers/purchasewithcredit/" + id, body, Void.class);
@@ -88,7 +85,6 @@ public class CustomerWebController {
     
     @PostMapping("/payment/{id}")
     public String makePayment(@PathVariable Long id, @RequestParam("payment") double payment, @ModelAttribute Customer customer) {
-        System.out.println("INSIDE MAKE PURCHASE WEB CONTROLLER");
         Map<String, Double> body = new HashMap<>();
         body.put("totalPayment", payment);
         restTemplate.postForObject("http://localhost:8080/customers/payment/" + id, body, Void.class);
