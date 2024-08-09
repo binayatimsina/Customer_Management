@@ -1,7 +1,78 @@
-<form th:action="@{${customer.id} != null? '/web/customers/update/' + ${customer.id}: '/web/customers'}" th:object="${customer}" method="post" >
-    <h1>Customer Form</h1> <br>
-    <label for="id">Name:</label><br>
-    <input type="text" th:field="*{name}"><br>
-    <button type="submit"> Submit</button>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.alert {
+  padding: 15px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <form th:action="@{${customer.id} != null? '/web/customers/update/' + ${customer.id}: '/web/customers'}" th:object="${customer}" method="post">
+      <h1>Customer Form</h1>
+      <label for="id">Name:</label>
+      <input type="text" th:field="*{name}">
+      <button type="submit">Submit</button>
   </form>
-  
+</div>
+
+</body>
+</html>

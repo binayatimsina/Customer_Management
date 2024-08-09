@@ -1,13 +1,90 @@
-<form id="purchaseForm">
-  <h1>Purchase Form</h1> <br>
-  <label>Quantity:</label><br>
-  <input type="number" id="quanity" name="quantity" value="0" min="0" step="1"><br><br>
-  <label>Total Amount:</label><br>
-  <input id="totalAmount" name="totalAmount" value="0" readonly><br>
-  <input type="hidden" id="customerId" name="customerId" th:value="${customer.id}"> 
-  <button type="button" id="purchase"> Purchase</button>
-  <button type="button" id="purchaseWithCredit">Purchase With Credit</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button.secondary {
+  background-color: #008CBA;
+}
+
+button.secondary:hover {
+  background-color: #007B9E;
+}
+
+.alert {
+  padding: 15px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <form id="purchaseForm">
+    <h1>Purchase Form</h1>
+    <label>Quantity:</label>
+    <input type="number" id="quanity" name="quantity" value="0" min="0" step="1">
+    <label>Total Amount:</label>
+    <input id="totalAmount" name="totalAmount" value="0" readonly>
+    <input type="hidden" id="customerId" name="customerId" th:value="${customer.id}">
+    <button type="button" id="purchase">Purchase</button>
+    <button type="button" id="purchaseWithCredit" class="secondary">Purchase With Credit</button>
+  </form>
+</div>
 
 <script>
   document.getElementById('quanity').addEventListener('input', function() {
@@ -44,3 +121,6 @@
       }
   });
 </script>
+
+</body>
+</html>

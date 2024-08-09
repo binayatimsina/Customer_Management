@@ -1,33 +1,106 @@
-<form id="paymentForm">
-    <h1>Payment Form</h1> <br>
-    <label>Payment Amount:</label><br>
-    <input type="hidden" id="balanceDue" name="balanceDue" th:value="${customer.balanceDue}"> 
-    <input type="hidden" id="customerId" name="customerId" th:value="${customer.id}"> 
-    <input type="number" id="payment" name="payment" value="0" min="0" step="1"><br><br>
-    <button type="button" id="makePayment">Make Payment</button>
-  </form>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
 
-  <script>
+        .form-container {
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .form-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #218838;
+        }
+
+        .form-container .alert {
+            margin-top: 20px;
+            padding: 10px;
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Payment Form</h1>
+    <form id="paymentForm">
+        <label for="payment">Payment Amount:</label>
+        <input type="hidden" id="balanceDue" name="balanceDue" th:value="${customer.balanceDue}">
+        <input type="hidden" id="customerId" name="customerId" th:value="${customer.id}">
+        <input type="number" id="payment" name="payment" value="0" min="0" step="1">
+        <button type="button" id="makePayment">Make Payment</button>
+    </form>
+    <div id="alert" class="alert">Overpayment not allowed!</div>
+</div>
+
+<script>
     document.getElementById('payment').addEventListener('input', function() {
         var paymentAmount = parseFloat(document.getElementById('payment').value);
         document.getElementById('makePayment').disabled = paymentAmount == 0;
     });
 
     document.getElementById('makePayment').addEventListener('click', function() {
-      var form = document.getElementById('paymentForm');
-      var totalPaymentAmount = parseFloat(document.getElementById('payment').value);
-      var totalBalanceDue = parseFloat(document.getElementById('balanceDue').value);
-      console.log("total payment:");
-      console.log(totalPaymentAmount);
-      console.log("total balance due:");
-      console.log(totalBalanceDue);
-      if (totalBalanceDue >= totalPaymentAmount) {
-        form.action = '/web/customers/payment/' + (document.getElementById('customerId').value || '');
-        form.method = 'post';
-        form.submit();
-      } else {
-        alert("Overpayment not allowed!");
-      }
-  });
-  </script>
-  
+        var form = document.getElementById('paymentForm');
+        var totalPaymentAmount = parseFloat(document.getElementById('payment').value);
+        var totalBalanceDue = parseFloat(document.getElementById('balanceDue').value);
+        
+        if (totalBalanceDue >= totalPaymentAmount) {
+            form.action = '/web/customers/payment/' + (document.getElementById('customerId').value || '');
+            form.method = 'post';
+            form.submit();
+        } else {
+            document.getElementById('alert').style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>
