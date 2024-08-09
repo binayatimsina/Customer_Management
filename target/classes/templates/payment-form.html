@@ -91,7 +91,9 @@
         var form = document.getElementById('paymentForm');
         var totalPaymentAmount = parseFloat(document.getElementById('payment').value);
         var totalBalanceDue = parseFloat(document.getElementById('balanceDue').value);
-        
+        if (totalPaymentAmount < 0) {
+          alert("Payment cannot be negative value");
+        }
         if (totalBalanceDue >= totalPaymentAmount) {
             form.action = '/web/customers/payment/' + (document.getElementById('customerId').value || '');
             form.method = 'post';
