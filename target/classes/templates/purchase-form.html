@@ -4,15 +4,14 @@
   <input type="number" id="quanity" name="quantity" value="0" min="0" step="1"><br><br>
   <label>Total Amount:</label><br>
   <input id="totalAmount" name="totalAmount" value="0" readonly><br>
-  <!-- Add a hidden input field for customerId -->
-  <input type="hidden" id="customerId" name="customerId" th:value="${customer.id}"> <!-- Example value -->
+  <input type="hidden" id="customerId" name="customerId" th:value="${customer.id}"> 
   <button type="button" id="purchase"> Purchase</button>
   <button type="button" id="purchaseWithCredit">Purchase With Credit</button>
 </form>
 
 <script>
   document.getElementById('quanity').addEventListener('input', function() {
-      var quantity = document.getElementById('quanity').value;
+      var quantity = parseFloat(document.getElementById('quanity').value);
       var totalAmount = quantity * 25;
       document.getElementById('totalAmount').value = totalAmount;
       document.getElementById('purchase').disabled = quantity == 0;
@@ -21,15 +20,27 @@
 
   document.getElementById('purchase').addEventListener('click', function() {
       var form = document.getElementById('purchaseForm');
-      form.action = '/web/customers/purchase/' + (document.getElementById('customerId').value || '');
-      form.method = 'post';
-      form.submit();
+      var quantity = parseFloat(document.getElementById('quanity').value);
+      var totalAmount = quantity * 25;
+      if (totalAmount > 0) {
+        form.action = '/web/customers/purchase/' + (document.getElementById('customerId').value || '');
+        form.method = 'post';
+        form.submit();
+      } else {
+        alert("Total amount must be greater than 0!");
+      }
   });
 
   document.getElementById('purchaseWithCredit').addEventListener('click', function() {
       var form = document.getElementById('purchaseForm');
-      form.action = '/web/customers/purchasewithcredit/' + (document.getElementById('customerId').value || '');
-      form.method = 'post';
-      form.submit();
+      var quantity = parseFloat(document.getElementById('quanity').value);
+      var totalAmount = quantity * 25;
+      if (totalAmount > 0) {
+        form.action = '/web/customers/purchasewithcredit/' + (document.getElementById('customerId').value || '');
+        form.method = 'post';
+        form.submit();
+      } else {
+        alert("Total purchase with credit amount must be greater than 0!");
+      }
   });
 </script>

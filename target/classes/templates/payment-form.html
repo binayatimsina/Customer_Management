@@ -1,14 +1,33 @@
-<form th:action="@{${customer.id} != null? '/web/customers/payment/' + ${customer.id}: '/web/customers'}" th:object="${customer}" method="post" >
+<form id="paymentForm">
     <h1>Payment Form</h1> <br>
     <label>Payment Amount:</label><br>
+    <input type="hidden" id="balanceDue" name="balanceDue" th:value="${customer.balanceDue}"> 
+    <input type="hidden" id="customerId" name="customerId" th:value="${customer.id}"> 
     <input type="number" id="payment" name="payment" value="0" min="0" step="1"><br><br>
-    <button type="submit" id="makePayment">Make Payment</button>
+    <button type="button" id="makePayment">Make Payment</button>
   </form>
 
   <script>
     document.getElementById('payment').addEventListener('input', function() {
-        var paymentAmount = document.getElementById('payment').value;
+        var paymentAmount = parseFloat(document.getElementById('payment').value);
         document.getElementById('makePayment').disabled = paymentAmount == 0;
     });
+
+    document.getElementById('makePayment').addEventListener('click', function() {
+      var form = document.getElementById('paymentForm');
+      var totalPaymentAmount = parseFloat(document.getElementById('payment').value);
+      var totalBalanceDue = parseFloat(document.getElementById('balanceDue').value);
+      console.log("total payment:");
+      console.log(totalPaymentAmount);
+      console.log("total balance due:");
+      console.log(totalBalanceDue);
+      if (totalBalanceDue >= totalPaymentAmount) {
+        form.action = '/web/customers/payment/' + (document.getElementById('customerId').value || '');
+        form.method = 'post';
+        form.submit();
+      } else {
+        alert("Overpayment not allowed!");
+      }
+  });
   </script>
   
